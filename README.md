@@ -14,6 +14,9 @@ It is inspired by the simple `Plan/Build` modes found in many AI coding tools, b
 
 ## Table of contents
 
+- [Install](#install)
+  - [Manual installation (release ZIP)](#manual-installation-release-zip)
+  - [Nix Home-Manager (optional)](#nix-home-manager-optional)
 - [Design choices](#design-choices)
 - [Team architecture](#team-architecture)
   - [The Roles](#the-roles)
@@ -22,6 +25,65 @@ It is inspired by the simple `Plan/Build` modes found in many AI coding tools, b
   - [When to run archivist manually](#when-to-run-archivist-manually)
   - [Typical Tasks](#typical-tasks)
 - [Skills (Contracts)](#skills-contracts)
+
+## Install
+
+### Manual installation (release ZIP)
+
+Download the rendered OpenCode pack from Releases and follow [INSTALL.md](INSTALL.md).
+
+- Release page: https://github.com/phira-ai/Phira/releases
+- Asset name: `phira-opencode-<tag>.zip`
+
+If you are using OpenCode directly, you can ask your agent to install `phira` for you:
+
+Paste this into OpenCode:
+
+```text
+Install Phira for me by following INSTALL.md in this repository exactly.
+
+Use:
+- Release page: https://github.com/phira-ai/Phira/releases
+- Asset name pattern: phira-opencode-<tag>.zip
+- Install path: ~/.config/opencode/phira
+
+After install, verify:
+1) phira agents exist under ~/.config/opencode/agents
+2) /p /h /i /r /a commands exist under ~/.config/opencode/commands
+3) phira-* skills exist under ~/.config/opencode/skills
+4) archivist-auto.js exists under ~/.config/opencode/plugins
+```
+
+Then restart OpenCode to apply change.
+
+### Nix Home-Manager (optional)
+
+If you prefer Nix-managed installs, add this repo as a flake input and enable the module:
+
+```nix
+{
+  inputs.phira = {
+    url = "github:phira-ai/Phira";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.home-manager.follows = "home-manager";
+  };
+
+  outputs = { self, nixpkgs, home-manager, phira, ... }: {
+    homeConfigurations."<you>" = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs { system = "<your-system>"; };
+      modules = [
+        phira.homeManagerModules.default
+        ({ ... }: {
+          programs.phira.enable = true;
+
+          # Optional overrides:
+          # programs.phira.agents = { phira = { settings = { model = "..."; }; }; };
+        })
+      ];
+    };
+  };
+}
+```
 
 ## Design choices
 
