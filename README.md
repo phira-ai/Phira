@@ -17,6 +17,7 @@ It is inspired by the simple `Plan/Build` modes found in many AI coding tools, b
 - [Install](#install)
   - [Manual installation (release ZIP)](#manual-installation-release-zip)
   - [Nix Home-Manager (optional)](#nix-home-manager-optional)
+  - [Model provider (OpenAI by default)](#model-provider-openai-by-default)
 - [Design choices](#design-choices)
 - [Team architecture](#team-architecture)
   - [The Roles](#the-roles)
@@ -80,6 +81,42 @@ If you prefer Nix-managed installs, add this repo as a flake input and enable th
     };
   };
 }
+```
+
+### Model provider (OpenAI by default)
+
+Phira ships with OpenAI model IDs by default (for example `openai/gpt-5.2` and `openai/gpt-5.3-codex`).
+
+Before using the agents, you should either:
+
+1. Connect OpenAI as a provider in OpenCode, or
+2. Change each agent `model:` to a provider/model you already use.
+
+If you change providers, also review each agent's `providersExtra` block. Those keys are provider-specific and may need to be updated (or removed) for the new provider.
+
+For manual installs, edit the agent files and update the YAML frontmatter `model:` values:
+
+- `~/.config/opencode/agents/phira*.md`
+- or the linked source files under `~/.config/opencode/phira/agents/*.md`
+
+For Nix Home-Manager installs, override models in your module config:
+
+```nix
+({ ... }: {
+  programs.phira.enable = true;
+
+  programs.phira.agents = {
+    "phira".settings = {
+      model = "<provider>/<model>";
+      providersExtra = {
+        # Update/remove provider-specific keys when switching providers.
+      };
+    };
+
+    # ...
+
+  };
+})
 ```
 
 ## Design choices
@@ -177,7 +214,7 @@ You can run `phira-archivist` (`/a`) any time, especially after:
 
 ### Typical Tasks
 
-> [Warning]
+> [!WARNING]
 > Works best with [`summarise-paper`](https://github.com/phira-ai/Phi-Skills.git) and [`search-conference`](https://github.com/phira-ai/Phi-Skills.git) skills.
 
 - **Paper Summarisation:**
