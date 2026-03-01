@@ -185,6 +185,9 @@ Alternatively, if you don't want the agents to pollute or to be polluted by your
 
 ### How to use
 
+> [!TIP]
+> For the best experience, use OpenCode Desktop or `opencode web`. They render math equations well, while OpenCode TUI currently does not. See [this issue](https://github.com/anomalyco/opencode/issues/11655)
+
 Use this simple workflow for new ideas:
 
 1. **Brainstorm and challenge in parallel**
