@@ -30,10 +30,7 @@ It is inspired by the simple `Plan/Build` modes found in many AI coding tools, b
 
 ### Manual installation (release ZIP)
 
-Download the rendered OpenCode pack from Releases and follow [INSTALL.md](INSTALL.md).
-
-- Release page: https://github.com/phira-ai/Phira/releases
-- Asset name: `phira-opencode-<tag>.zip`
+Download the package from Releases and follow [INSTALL.md](INSTALL.md).
 
 If you are using OpenCode directly, you can ask your agent to install `phira` for you:
 
