@@ -30,12 +30,12 @@ jobs:
       - name: Build phira package
         run: nix build .#phira -L
 
-      - name: Pack rendered agents and skills
+      - name: Pack rendered OpenCode bundle
         run: |
           tag='${{ github.event.release.tag_name }}'
           mkdir -p dist
           out="$GITHUB_WORKSPACE/dist/phira-opencode-${tag}.zip"
-          nix shell nixpkgs#zip --command sh -c "cd result && zip -r \"$out\" agents skills"
+          nix shell nixpkgs#zip --command sh -c "cd result && zip -r \"$out\" agents skills commands plugins"
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
