@@ -153,10 +153,10 @@ Most coding agents are monolithic: you ask for a feature, and they start editing
 - 🧭 **`phira` (Orchestrator)**
   The manager. Answers general research-related questions. Interprets your intent, proposes plan on which agent should do what, complete tasks autonomously (experimental).
 
-- 🧩 **`phira-prototyper` **(Design & scaffolding)\*\*
+- 🧩 **`phira-prototyper` (Design & scaffolding)**
   Takes a chosen direction and turns it into a Proof-of-Concept design with formal interfaces and edge cases. See how the ideas look like next to your real code
 
-- 🧠 **`phira-hypothesizer` **(Idea formation)\*\*
+- 🧠 **`phira-hypothesizer` (Idea formation)**
   Turns vague directions into 3-5 distinct option cards. It focuses on math-forward core mechanisms and end-to-end training/inference pipelines rather than just prose.
 
 - 🛠️ **`phira-implementer` (Implementation)**
