@@ -1,0 +1,45 @@
+name: Publish rendered OpenCode pack
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  build-and-upload:
+    name: Build and upload pack
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v16
+
+      - name: Enable flakes
+        run: |
+          mkdir -p ~/.config/nix
+          cat > ~/.config/nix/nix.conf <<'EOF'
+          experimental-features = nix-command flakes
+          EOF
+
+      - name: Build phira package
+        run: nix build .#phira -L
+
+      - name: Pack rendered agents and skills
+        run: |
+          tag='${{ github.event.release.tag_name }}'
+          mkdir -p dist
+          out="$GITHUB_WORKSPACE/dist/phira-opencode-${tag}.zip"
+          nix shell nixpkgs#zip --command sh -c "cd result && zip -r \"$out\" agents skills"
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          files: dist/phira-opencode-*.zip
+          fail_on_unmatched_files: true
