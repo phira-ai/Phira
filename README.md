@@ -1,13 +1,11 @@
 <p align="center">
-  <a href="https://opencode.ai">
-    <picture>
-      <source srcset="assets/phira-wordmark-dark.png" media="(prefers-color-scheme: dark)">
-      <source srcset="assets/phira-wordmark-light.png" media="(prefers-color-scheme: light)">
-      <img src="assets/phira-wordmark-light.png" alt="Phira logo">
-    </picture>
-  </a>
+  <picture>
+    <source srcset="assets/phira-wordmark-dark.png" media="(prefers-color-scheme: dark)">
+    <source srcset="assets/phira-wordmark-light.png" media="(prefers-color-scheme: light)">
+    <img src="assets/phira-wordmark-light.png" alt="Phira logo" width="520">
+  </picture>
 </p>
-<p align="center">Your agentic research team on OpenCode</p>
+<p align="center"><strong>Your agentic research assistant team on OpenCode</strong></p>
 
 Modern AI research is all about fast iteration: you test and discard ideas rapidly until you find the signal.
 
