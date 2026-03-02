@@ -1,6 +1,13 @@
-# phira
-
-> _A supervised agentic team for Machine Learning and Computer Science research._
+<p align="center">
+  <a href="https://opencode.ai">
+    <picture>
+      <source srcset="assets/phira-wordmark-dark.png" media="(prefers-color-scheme: dark)">
+      <source srcset="assets/phira-wordmark-light.png" media="(prefers-color-scheme: light)">
+      <img src="assets/phira-wordmark-light.png" alt="Phira logo">
+    </picture>
+  </a>
+</p>
+<p align="center">Your agentic research team on OpenCode</p>
 
 Modern AI research is all about fast iteration: you test and discard ideas rapidly until you find the signal.
 
