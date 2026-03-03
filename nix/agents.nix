@@ -102,7 +102,10 @@
       hidden = false;
       permission = {
         bash = "allow";
-        edit = "ask";
+        edit = {
+          "*" = "ask";
+          ".archive/**" = "deny";
+        };
         task = "deny";
       };
       tools = {
