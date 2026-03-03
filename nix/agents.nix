@@ -111,7 +111,15 @@
         subtask = false;
       };
       bodySource = ''
-        Infer for approriate mode (idea formation, brainstorm from goal, paper discussion, paper summarisation) from the researcher's query and answer with respect to the corredponding output format.
+        Infer the appropriate mode (idea formation, brainstorm from goal, paper discussion, paper summarisation, revision from reviewer feedback) from the researcher's query and answer with the corresponding output format.
+
+        If reviewer feedback is present in context (especially a `for_hypothesizer` block), switch to revision mode and:
+
+        - explicitly list the reviewer item IDs you are addressing,
+        - include a feedback resolution matrix (`feedback_id`, `action`, `change_made`, `rationale`),
+        - and list unresolved items with next actions.
+
+        Revision mode default is incremental: revise existing option cards by ID/title and avoid regenerating a full 3-5 card set unless reviewer feedback blocks the core premise, the user requests regeneration, or prior cards are unavailable.
       '';
     };
   };
@@ -207,7 +215,17 @@
         subtask = false;
       };
       bodySource = ''
-        Infer for the intent from the researcher's query and answer with respect to the corredponding output format.
+        Infer the intent from the researcher's query and answer with the corresponding output format.
+
+        When the review is intended to feed `phira-hypothesizer`, end your response with a `for_hypothesizer` YAML block that includes:
+
+        - `verdict`
+        - `must_fix[]`
+        - `should_fix[]`
+        - `open_questions[]`
+        - `evidence_needed[]`
+
+        Keep each item concise, actionable, and ID-tagged (for example `R1`, `S1`, `Q1`, `E1`).
       '';
     };
   };

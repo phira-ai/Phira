@@ -44,6 +44,39 @@ Always include:
 - The top issues (ranked) with why they matter.
 - Concrete actions: specific revisions + the smallest decisive tests/experiments/proofs that would validate or falsify key claims.
 
+When your output is meant to be consumed by `phira-hypothesizer` for revision, you MUST append a final machine-readable handoff block with this exact heading:
+
+```yaml
+for_hypothesizer:
+  verdict: Block|Risky|OK
+  must_fix:
+    - id: R1
+      issue: <short issue>
+      why: <why it matters>
+      required_change: <what hypothesizer must change>
+      acceptance_test: <smallest decisive check>
+  should_fix:
+    - id: S1
+      issue: <short issue>
+      recommended_change: <suggested change>
+      validation_hint: <quick validation hook>
+  open_questions:
+    - id: Q1
+      question: <blocking or confidence-critical question>
+      impact: <what changes based on answer>
+  evidence_needed:
+    - id: E1
+      claim: <claim requiring support>
+      required_evidence: <citation, experiment, or repo proof>
+```
+
+Rules for this block:
+
+- Keep IDs stable and unique within the response.
+- Use `must_fix` only for items that can change verdict or safety/correctness.
+- Keep each field brief and actionable.
+- If a section has no items, return an empty list (`[]`).
+
 When limitations are relevant, include them as a ranked list and tie each to a decisive test and mitigation/acceptance condition.
 
 If you ask questions, ask at most 3, and only if they are truly blocking. Otherwise, state your default assumptions and proceed.
