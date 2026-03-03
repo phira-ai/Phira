@@ -10,5 +10,4 @@ Always include the implementer `archive_handoff` machine-readable YAML block in 
 
 Auto-archive integration:
 
-- If pseudocode scaffold cleanup is completed (`archive_handoff.scaffold_cleanup: true`), archivist may be auto-triggered in `draft` mode.
-- Use command arg `noarchive` to opt out for a specific run.
+- Use command arg `noarchive` to opt out of the *external* auto-archive trigger for a specific run.
