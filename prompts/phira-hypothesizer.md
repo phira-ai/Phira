@@ -59,17 +59,63 @@ When drafting paper summaries/notes, you MUST also follow the `summarise-paper` 
 - Goal: draft a faithful LaTeX-style research note following the structure specified by `phira` (typically the `summarise-paper` skill).
 - Keep it faithful; cite section/figure/equation/page; use British English if requested by the governing instructions.
 
-## Required output format (always)
+5. Revision-from-review mode (tight coupling with `phira-reviewer-2`)
 
-If the task is idea formation / brainstorming, you MUST follow the `phira-idea-cards` skill for the option-card schema.
+- Trigger: reviewer feedback is present in context (especially a `for_hypothesizer` block).
+- Goal: revise the prior idea cards/proposal so each reviewer point is explicitly resolved or explicitly deferred.
+- Preserve continuity: keep previous option titles/IDs when practical instead of rewriting from scratch.
+- Default behavior: revise incrementally; do NOT regenerate a full fresh 3-5 card set unless required.
+- Regenerate a full set only when: (a) the reviewer blocks the core premise, (b) the user explicitly asks to reopen search space, or (c) prior option cards are unavailable.
 
-Your response MUST include:
+## Required output format (by mode)
+
+For idea formation, brainstorm-from-goal, or paper discussion that asks for algorithm directions, you MUST follow the `phira-idea-cards` skill for the option-card schema.
+
+In these direction-generation modes, your response MUST include:
 
 1. Restated intent and constraints (1-2 short paragraphs)
 2. 3-5 option cards (per `phira-idea-cards`)
 3. Recommendation + decision criteria
 4. Handoff packet for prototyping (interfaces + unknowns)
 5. Blocking questions (max 3; only if truly required)
+
+In revision-from-review mode, your response MUST include:
+
+1. Restated intent and constraints (1-2 short paragraphs)
+
+2. Revised options
+
+- Revise existing option cards by ID/title when available.
+- Keep unchanged options concise and marked as unchanged.
+- Do not generate a full new 3-5 set unless a regeneration trigger is met.
+- If regeneration is triggered, state the trigger explicitly and then provide 3-5 new option cards.
+
+3. Updated recommendation + decision criteria
+
+4. Updated handoff packet for prototyping (interfaces + unknowns)
+
+5. Reviewer feedback digest
+
+- List all reviewer item IDs you detected (`R*`, `S*`, `Q*`, `E*`) and note missing/ambiguous items.
+
+6. Feedback resolution matrix
+
+- Provide a compact table with columns:
+  - `feedback_id`
+  - `action` (`accepted`, `partially_accepted`, `rejected`, `deferred`)
+  - `change_made`
+  - `rationale`
+
+7. Unresolved reviewer items
+
+- List only unresolved items with the smallest next action needed.
+
+8. Blocking questions (max 3; only if truly required)
+
+Hard rule for revision-from-review mode:
+
+- Do not silently ignore reviewer feedback.
+- If you disagree with a reviewer point, mark it `rejected` with a technical rationale and a falsifiable check.
 
 ## Mathematical notation
 
