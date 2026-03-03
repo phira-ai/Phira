@@ -29,6 +29,10 @@
             agents = agentDefs;
             userAgents = { };
           };
+          renderedCommands = phiRaLib.renderCommands {
+            agents = agentDefs;
+            userAgents = { };
+          };
           files = pkgs.lib.mapAttrsToList (
             name: text: pkgs.writeTextDir "agents/${name}.md" text
           ) renderedAgents;
@@ -40,12 +44,9 @@
             name: pkgs.writeTextDir "skills/${name}/SKILL.md" (builtins.readFile (skillsDir + "/${name}/SKILL.md"))
           ) (pkgs.lib.attrNames skillDirs);
 
-          commandsDir = ./commands;
-          commandEntries = builtins.readDir commandsDir;
-          commandFiles = pkgs.lib.filterAttrs (_: t: t == "regular") commandEntries;
           renderedCommandFiles = map (
-            name: pkgs.writeTextDir "commands/${name}" (builtins.readFile (commandsDir + "/${name}"))
-          ) (pkgs.lib.attrNames commandFiles);
+            name: pkgs.writeTextDir "commands/${name}" renderedCommands.${name}
+          ) (pkgs.lib.attrNames renderedCommands);
 
           pluginsDir = ./plugins;
           pluginEntries = builtins.readDir pluginsDir;

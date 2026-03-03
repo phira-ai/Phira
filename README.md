@@ -80,7 +80,7 @@ If you prefer Nix-managed installs, add this repo as a flake input and enable th
           programs.phira.enable = true;
 
           # Optional overrides:
-          # programs.phira.agents = { phira = { settings = { model = "..."; }; }; };
+          # programs.phira.agents = { phira = { agent.settings = { model = "..."; }; }; };
         })
       ];
     };
@@ -111,7 +111,7 @@ For Nix Home-Manager installs, override models in your module config:
   programs.phira.enable = true;
 
   programs.phira.agents = {
-    "phira".settings = {
+    "phira".agent.settings = {
       model = "<provider>/<model>";
       providersExtra = {
         # Update/remove provider-specific keys when switching providers.

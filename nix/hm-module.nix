@@ -20,12 +20,10 @@ let
     name: builtins.readFile (skillsDir + "/${name}/SKILL.md")
   );
 
-  commandsDir = ../commands;
-  commandEntries = builtins.readDir commandsDir;
-  commandFiles = lib.filterAttrs (_: t: t == "regular") commandEntries;
-  renderedCommands = lib.genAttrs (lib.attrNames commandFiles) (
-    name: builtins.readFile (commandsDir + "/${name}")
-  );
+  renderedCommands = phiraLib.renderCommands {
+    inherit agents;
+    userAgents = cfg.agents;
+  };
 
   pluginsDir = ../plugins;
   pluginEntries = builtins.readDir pluginsDir;
@@ -43,30 +41,43 @@ in
       default = { };
       example = {
         pseudocode = {
-          settings = {
-            model = "openai/gpt-5.3-codex";
-            temperature = 0.2;
-            color = "accent";
-            providersExtra = {
-              reasoningEffort = "high";
-              textVerbosity = "low";
+          agent = {
+            settings = {
+              model = "openai/gpt-5.3-codex";
+              temperature = 0.2;
+              color = "accent";
+              providersExtra = {
+                reasoningEffort = "high";
+                textVerbosity = "low";
+              };
+              extraTools = {
+                "context7_*" = true;
+                "morph*" = true;
+              };
+              commands = [
+                "plan"
+                "review"
+              ];
+              plugins = [
+                "context7"
+                "morph"
+              ];
             };
-            extraTools = {
-              "context7_*" = true;
-              "morph*" = true;
+            bodySource = ''
+              You are the pseudocode assistant.
+            '';
+          };
+          command = {
+            settings = {
+              description = "Invoke the pseudocode assistant";
+              agent = "pseudocode";
+              subtask = false;
             };
-            commands = [
-              "plan"
-              "review"
-            ];
-            plugins = [
-              "context7"
-              "morph"
-            ];
+            bodySource = "Infer the mode from the researcher query and run.";
           };
         };
       };
-      description = "Per-agent configuration merged onto the built-in agents. Each agent may set 'enable', 'settings', and 'bodySource'. Use settings.providersExtra for provider-specific keys, settings.extraTools for wildcard MCP tool permissions, and settings.commands/settings.plugins for command/plugin config passthrough.";
+      description = "Per-agent configuration merged onto the built-in agents. Each entry may set 'enable', 'agent', and 'command'. Use agent.settings.providersExtra for provider-specific keys, agent.settings.extraTools for wildcard MCP tool permissions, and agent.settings.commands/agent.settings.plugins for config passthrough. Both agent.bodySource and command.bodySource accept either a path or a string (including multiline strings).";
     };
 
     installPath = lib.mkOption {
