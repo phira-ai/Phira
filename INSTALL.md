@@ -55,7 +55,9 @@ for d in "$HOME/.config/opencode/phira/skills/"*; do
   ln -s "$d" "$HOME/.config/opencode/skills/$name"
 done
 
-ln -sf "$HOME/.config/opencode/phira/plugins/archivist-auto.js" "$HOME/.config/opencode/plugins/archivist-auto.js"
+for f in "$HOME/.config/opencode/phira/plugins/"*.js; do
+  ln -sf "$f" "$HOME/.config/opencode/plugins/$(basename "$f")"
+done
 ```
 
 ### 4. Restart OpenCode
@@ -68,7 +70,7 @@ Restart OpenCode so it reloads agents, skills, commands, and plugins.
 ls "$HOME/.config/opencode/agents" | grep '^phira'
 ls "$HOME/.config/opencode/commands" | grep -E '^(a|h|i|p|r)\.md$'
 ls "$HOME/.config/opencode/skills" | grep '^phira-'
-ls "$HOME/.config/opencode/plugins" | grep '^archivist-auto\.js$'
+ls "$HOME/.config/opencode/plugins" | grep -E '^(archivist-auto|chained-commands)\.js$'
 ```
 
 ## Ask OpenCode to install it for you
@@ -87,7 +89,7 @@ Then verify:
 1) phira agents are linked in ~/.config/opencode/agents
 2) /p /h /i /r /a command files are linked in ~/.config/opencode/commands
 3) phira-* skills are linked in ~/.config/opencode/skills
-4) archivist-auto.js is linked in ~/.config/opencode/plugins
+4) archivist-auto.js and chained-commands.js are linked in ~/.config/opencode/plugins
 ```
 
 ## Updating

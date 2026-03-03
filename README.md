@@ -54,7 +54,7 @@ After install, verify:
 1) phira agents exist under ~/.config/opencode/agents
 2) /p /h /i /r /a commands exist under ~/.config/opencode/commands
 3) phira-* skills exist under ~/.config/opencode/skills
-4) archivist-auto.js exists under ~/.config/opencode/plugins
+4) archivist-auto.js and chained-commands.js exist under ~/.config/opencode/plugins
 ```
 
 Then restart OpenCode to apply change.
@@ -185,6 +185,12 @@ If you want the agents to take in your current chat history as their context, in
 |Implementer|`/i`|
 |Reviewer-2|`/r`|
 |Archivist|`/a`|
+
+Phira also supports chained command execution in manual mode. Example:
+
+```text
+/r challenge option 1. then /h refine based on review. then /p summarize as pseudocode.
+```
 
 Alternatively, if you don't want the agents to pollute or to be polluted by your chat history, you can invoke them as subagents with `@`
 
