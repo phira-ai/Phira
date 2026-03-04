@@ -89,6 +89,7 @@
           "*" = false;
           glob = true;
           grep = true;
+          question = true;
           read = true;
           skill = true;
           webfetch = true;
@@ -192,6 +193,7 @@
         tools = {
           "*" = false;
           bash = true;
+          question = true;
           read = true;
           glob = true;
           grep = true;

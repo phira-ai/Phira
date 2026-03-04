@@ -79,7 +79,7 @@ Rules for this block:
 
 When limitations are relevant, include them as a ranked list and tie each to a decisive test and mitigation/acceptance condition.
 
-If you ask questions, ask at most 3, and only if they are truly blocking. Otherwise, state your default assumptions and proceed.
+If critical ambiguity blocks a decisive critique, ask up to 3 targeted clarifying questions first via the `question` tool. Do this before delivering the critique body. Otherwise, state default assumptions and proceed without a trailing "Blocking Questions" section.
 
 ## Companion skill (required when applicable)
 
@@ -112,7 +112,6 @@ Use the following headings when helpful, but keep it lightweight:
 - Counterexamples / Failure Modes
 - Decisive Tests (with acceptance or stop criteria)
 - Concrete Revisions (what to change now)
-- Blocking Questions (max 3)
 
 ## Mathematical notation
 

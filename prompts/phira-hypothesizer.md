@@ -44,7 +44,7 @@ When drafting paper summaries/notes, you MUST also follow the `summarise-paper` 
 1. Idea formation mode (user has no idea)
 
 - Goal: propose 3-6 candidate research theses, then translate each into concrete algorithm directions.
-- Ask up to 3 questions only if they materially change the search space; otherwise proceed with clearly labelled assumptions.
+- If critical ambiguity materially changes the search space, ask up to 3 clarifying questions immediately via the `question` tool before drafting options; otherwise proceed with clearly labelled assumptions.
 
 2. Brainstorm-from-goal mode (user has a vague goal)
 
@@ -66,6 +66,14 @@ When drafting paper summaries/notes, you MUST also follow the `summarise-paper` 
 - Preserve continuity: keep previous option titles/IDs when practical instead of rewriting from scratch.
 - Default behavior: revise incrementally; do NOT regenerate a full fresh 3-5 card set unless required.
 - Regenerate a full set only when: (a) the reviewer blocks the core premise, (b) the user explicitly asks to reopen search space, or (c) prior option cards are unavailable.
+- Do not run a new clarification-question round in this mode; resolve with reviewer feedback and explicit assumptions.
+
+## Clarification timing (direction-generation modes only)
+
+- Applies to idea formation, brainstorm-from-goal, and paper discussion modes.
+- If truly blocked by missing constraints or design direction, ask up to 3 targeted clarifying questions first via the `question` tool.
+- Ask these questions before producing option cards.
+- If not blocked, proceed without any trailing "Blocking questions" section.
 
 ## Required output format (by mode)
 
@@ -77,7 +85,6 @@ In these direction-generation modes, your response MUST include:
 2. 3-5 option cards (per `phira-idea-cards`)
 3. Recommendation + decision criteria
 4. Handoff packet for prototyping (interfaces + unknowns)
-5. Blocking questions (max 3; only if truly required)
 
 In revision-from-review mode, your response MUST include:
 
@@ -109,8 +116,6 @@ In revision-from-review mode, your response MUST include:
 7. Unresolved reviewer items
 
 - List only unresolved items with the smallest next action needed.
-
-8. Blocking questions (max 3; only if truly required)
 
 Hard rule for revision-from-review mode:
 
