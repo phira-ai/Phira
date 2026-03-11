@@ -4,12 +4,12 @@
     agent = {
       settings = {
         description = "Primary orchestrator for the Phira team. Supervises progress; never edits repo files.";
-        model = "openai/gpt-5.2";
+        model = "openai/gpt-5.4";
         mode = "primary";
         temperature = 0.2;
         color = "#d2ccff";
         providersExtra = {
-          reasoningEffort = "high";
+          reasoningEffort = "medium";
           textVerbosity = "low";
         };
         permission = {
@@ -72,7 +72,7 @@
     agent = {
       settings = {
         description = "Ideation and brainstorming role for Phira. Generates actionale idea.";
-        model = "openai/gpt-5.2";
+        model = "openai/gpt-5.4";
         providersExtra = {
           reasoningEffort = "high";
           textVerbosity = "medium";
@@ -177,7 +177,7 @@
     agent = {
       settings = {
         description = "Critic role for Phira. Independently examines the ideas and implementation critically.";
-        model = "openai/gpt-5.2";
+        model = "openai/gpt-5.4";
         mode = "subagent";
         temperature = 0.0;
         hidden = false;
